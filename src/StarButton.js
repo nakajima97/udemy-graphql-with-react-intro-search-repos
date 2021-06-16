@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 
 const StarButton = ({ node }) => {
   const totalCount = node.stargazers.totalCount;
+  const viewerHasStarred = node.viewerHasStarred;
+  const starCount = totalCount === 1 ? "1 star" : `${totalCount} stars`;
 
   return (
     <button type="button">
-      {totalCount === 1 ? "1 star" : `${totalCount} stars`}
+      {starCount} | {viewerHasStarred ? "starred" : "-"}
     </button>
   );
 };
