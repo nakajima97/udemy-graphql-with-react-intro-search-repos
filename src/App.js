@@ -1,14 +1,6 @@
 // import client from "./client";
-import { useQuery, gql } from "@apollo/client";
-
-const ME = gql`
-  query me {
-    user(login: "iteachonudemy") {
-      name
-      avatarUrl
-    }
-  }
-`;
+import { useQuery } from "@apollo/client";
+import { ME } from "./graphql";
 
 const App = () => {
   const { loading, error, data } = useQuery(ME);
