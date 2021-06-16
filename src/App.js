@@ -13,7 +13,6 @@ const defaultState = {
 const App = () => {
   const [variables, setVariables] = useState(defaultState);
 
-  // eslint-disable-next-line
   const { loading, error, data } = useQuery(SEARCH_REPOSITORIES, { variables });
 
   const showUserName = () => {
@@ -24,9 +23,6 @@ const App = () => {
     const repositoryCount = search.repositoryCount;
     const repositoryUnit = repositoryCount < 2 ? "Repository" : "Respositories";
     const title = `Github Repositories Search Results - ${repositoryCount} ${repositoryUnit}`;
-
-    // eslint-disable-next-line
-    console.log(search);
 
     return (
       <>
