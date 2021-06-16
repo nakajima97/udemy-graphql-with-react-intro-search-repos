@@ -17,7 +17,9 @@ const defaultState = {
 const App = () => {
   const [variables, setVariables] = useState(defaultState);
 
-  const { loading, error, data } = useQuery(SEARCH_REPOSITORIES, { variables });
+  const { loading, error, data, refetch } = useQuery(SEARCH_REPOSITORIES, {
+    variables,
+  });
 
   const SearchRepositories = () => {
     if (loading) return "...Loading";
@@ -65,7 +67,7 @@ const App = () => {
                   {edge.node.name}
                 </a>
                 &nbsp;
-                <StarButton node={edge.node} />
+                <StarButton node={edge.node} refetch={refetch} />
               </li>
             ))}
         </ul>

@@ -3,9 +3,17 @@ import PropTypes from "prop-types";
 import { ADD_STAR, REMOVE_STAR } from "./graphql";
 import { useMutation } from "@apollo/client";
 
-const StarButton = ({ node }) => {
-  const [addStar] = useMutation(ADD_STAR);
-  const [removeStar] = useMutation(REMOVE_STAR);
+const StarButton = ({ node, refetch }) => {
+  const [addStar] = useMutation(ADD_STAR, {
+    onCompleted() {
+      refetch();
+    },
+  });
+  const [removeStar] = useMutation(REMOVE_STAR, {
+    onCompleted() {
+      refetch();
+    },
+  });
 
   const totalCount = node.stargazers.totalCount;
   const viewerHasStarred = node.viewerHasStarred;
@@ -29,4 +37,5 @@ export default StarButton;
 
 StarButton.prototype = {
   node: PropTypes.array.isRequired,
+  refetch: PropTypes.func.isRequired,
 };
