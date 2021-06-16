@@ -19,7 +19,7 @@ const App = () => {
 
   const { loading, error, data } = useQuery(SEARCH_REPOSITORIES, { variables });
 
-  const showUserName = () => {
+  const SearchRepositories = () => {
     if (loading) return "...Loading";
     if (error) return `Error ${error.message}`;
 
@@ -92,7 +92,7 @@ const App = () => {
       <form>
         <input value={variables.query} onChange={handleChange}></input>
       </form>
-      <div>{showUserName()}</div>
+      <div>{SearchRepositories()}</div>
     </>
   );
 };
