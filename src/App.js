@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { SEARCH_REPOSITORIES } from "./graphql";
 
+import StarButton from "./StarButton";
+
 const PER_PAGE = 5;
 
 const defaultState = {
@@ -23,7 +25,8 @@ const App = () => {
 
     const search = data.search;
     const repositoryCount = search.repositoryCount;
-    const repositoryUnit = repositoryCount < 2 ? "Repository" : "Respositories";
+    const repositoryUnit =
+      repositoryCount === 1 ? "Repository" : "Respositories";
     const title = `Github Repositories Search Results - ${repositoryCount} ${repositoryUnit}`;
 
     const goNext = (search) => {
@@ -61,6 +64,8 @@ const App = () => {
                 >
                   {edge.node.name}
                 </a>
+                &nbsp;
+                <StarButton node={edge.node} />
               </li>
             ))}
         </ul>
