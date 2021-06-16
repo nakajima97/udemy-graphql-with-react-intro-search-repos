@@ -20,14 +20,16 @@ const App = () => {
     if (loading) return "...Loading";
     if (error) return `Error ${error.message}`;
 
-    return <div>test</div>;
+    const search = data.search;
+    const repositoryCount = search.repositoryCount;
+    const repositoryUnit = repositoryCount < 2 ? "Repository" : "Respositories";
+    const title = `Github Repositories Search Results - ${repositoryCount} ${repositoryUnit}`;
+
+    return <h2>{title}</h2>;
   };
 
   const handleChange = (e) => {
     setVariables({ ...variables, query: e.target.value });
-
-    // eslint-disable-next-line
-    console.log(e.target.value);
   };
 
   return (
