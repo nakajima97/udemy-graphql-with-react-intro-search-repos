@@ -11,11 +11,12 @@ const defaultState = {
   after: null,
   last: null,
   before: null,
-  query: "フロントエンドエンジニア",
+  query: "",
 };
 
 const App = () => {
   const [variables, setVariables] = useState(defaultState);
+  const [formValue, setFormValue] = useState("");
 
   const { loading, error, data, refetch } = useQuery(SEARCH_REPOSITORIES, {
     variables,
@@ -85,15 +86,20 @@ const App = () => {
     );
   };
 
-  const handleChange = (e) => {
-    setVariables({ ...variables, query: e.target.value });
-  };
-
   return (
     <>
       <form>
-        <input value={variables.query} onChange={handleChange}></input>
+        <input
+          value={formValue}
+          onChange={(e) => setFormValue(e.target.value)}
+        ></input>
       </form>
+      <button
+        type="button"
+        onClick={() => setVariables({ ...variables, query: formValue })}
+      >
+        検索
+      </button>
       <div>{SearchRepositories()}</div>
     </>
   );
