@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { SEARCH_REPOSITORIES } from "./graphql";
 
+const PER_PAGE = 5;
+
 const defaultState = {
-  first: 5,
+  first: PER_PAGE,
   after: null,
   last: null,
   before: null,
@@ -24,6 +26,13 @@ const App = () => {
     const repositoryUnit = repositoryCount < 2 ? "Repository" : "Respositories";
     const title = `Github Repositories Search Results - ${repositoryCount} ${repositoryUnit}`;
 
+    const goNext = (search) => {
+      setVariables({
+        ...defaultState,
+        after: search.pageInfo.endCursor,
+      });
+    };
+
     return (
       <>
         <h2>{title}</h2>
@@ -42,6 +51,11 @@ const App = () => {
               </li>
             ))}
         </ul>
+        {search.pageInfo.hasNextPage && (
+          <button type="button" onClick={() => goNext(search)}>
+            Next
+          </button>
+        )}
       </>
     );
   };
