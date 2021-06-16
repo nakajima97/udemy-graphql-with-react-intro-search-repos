@@ -25,7 +25,29 @@ const App = () => {
     const repositoryUnit = repositoryCount < 2 ? "Repository" : "Respositories";
     const title = `Github Repositories Search Results - ${repositoryCount} ${repositoryUnit}`;
 
-    return <h2>{title}</h2>;
+    // eslint-disable-next-line
+    console.log(search);
+
+    return (
+      <>
+        <h2>{title}</h2>
+        <ul>
+          {search &&
+            search.edges.map((edge) => (
+              <li>
+                <a
+                  key={edge.node.id}
+                  href={edge.node.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {edge.node.name}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </>
+    );
   };
 
   const handleChange = (e) => {
