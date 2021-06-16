@@ -17,9 +17,6 @@ const App = () => {
     if (loading) return "...Loading";
     if (error) return `Error ${error.message}`;
 
-    // eslint-disable-next-line
-    console.log({ data });
-
     return <div>{data.user.name}</div>;
   };
 
